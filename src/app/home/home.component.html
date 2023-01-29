@@ -1,0 +1,105 @@
+<header>
+  <h1>Angular Blog</h1>
+  <div class="buttons">
+    <input type="button" value="Sign in" class="button signIn" (click)="signIn()" *ngIf="Sign" [disabled]="block1"/>
+    <input type="button" value="Add post" class="button signIn" (click)="addPost()" *ngIf="!Sign" [disabled]="block1"/>
+    <div class="name-block" *ngIf="!Sign"> {{userName}}</div>
+    <input type="button" value="Sign up" class="button signUp" (click)="signUp()" *ngIf="Sign" [disabled]="block2"/>
+    <input type="button" value="Sign Out" class="button signOut" (click)="signOut()" *ngIf="!Sign" [disabled]="block2"/>
+  </div>
+</header>
+<main>
+  <div class="post" *ngFor="let info of blogs;index as i">
+    <div class="postContent">
+      <h2 class="postNum">{{info.topic}}</h2>
+      <h3 class="postedBy">Posted by: {{ info.postedBy }}</h3>
+      <h3 class="postText">{{ info.message }}</h3>
+    </div>
+    <div class="navigateBlock">
+      <span class="time">{{ info.date }}</span>
+      <div class="buttons" *ngIf="userCheck==info.id || userCheck==1">
+        <input type="button" value="Edit" class="edit button" (click)="edit(i)" [disabled]="addPostCheck"/>
+        <input type="button" value="Delete" class="delete button" (click)="delete(i)"[disabled]="addPostCheck" [disabled]="editCheck"/>
+      </div>
+    </div>
+  </div>
+  <div class="icon" *ngIf="clickCheck">
+    <div class="add-block" *ngIf="addPostCheck">
+      <h2>Add post</h2>
+      <hr />
+      <div class="block1">
+        <h3>Title:</h3>
+        <input type="text" name="" id="" class="text" [(ngModel)]="title"/>
+        <h3>Text:</h3>
+        <textarea
+          name=""
+          id=""
+          cols="30"
+          rows="10"
+          class="text textarea"
+          [(ngModel)]="postText"
+        ></textarea>
+      </div>
+      <hr />
+      <div class="buttons">
+        <input type="button" value="Close" class="button close" (click)="close()"/>
+        <input type="button" value="Post" class="button post" (click)="post()" />
+      </div>
+    </div>
+    <div class="signIn-block" *ngIf="signInCheck">
+      <h2>Sign In</h2>
+      <hr />
+      <div class="block1">
+        <h3>Email:</h3>
+        <input type="text" name="" id="" class="text" [(ngModel)]="email"/>
+        <h3>Password:</h3>
+        <input type="password" name="" id="" class="text password" [(ngModel)]="password"/>
+      </div>
+      <hr />
+      <div class="buttons">
+        <input type="button" value="Close" class="button close" (click)="close()"/>
+        <input type="button" value="Submit" class="button submit" (click)="submitIn()"/>
+      </div>
+    </div>
+    <div class="signUp-block" *ngIf="signUpCheck">
+      <h2>Sign Up</h2>
+      <hr />
+      <div class="block1">
+        <h3>Username:</h3>
+        <input type="text" name="" id="" class="text" [(ngModel)]="UserName"/>
+        <h3>Email:</h3>
+        <input type="text" name="" id="" class="text" [(ngModel)]="email"/>
+        <h3>Password:</h3>
+        <input type="text" name="" id="" class="text marginB" [(ngModel)]="password"/>
+      </div>
+      <hr />
+      <div class="buttons">
+        <input type="button" value="Close" class="button close" (click)="close()"/>
+        <input type="button" value="Submit" class="button submit1" (click)="submitUp()"/>
+      </div>
+    </div>
+    <div class="edit-block" *ngIf="editCheck">
+      <h2>Edit Post</h2>
+      <hr />
+      <div class="block1">
+        <h3>Title:</h3>
+        <input type="text" name="" id="" class="text" [(ngModel)]="title"/>
+        <h3>Text:</h3>
+        <textarea
+          name=""
+          id=""
+          cols="30"
+          rows="10"
+          class="text textarea"
+          [(ngModel)]="postText"
+        ></textarea>
+      </div>
+      <hr />
+      <div class="buttons">
+        <input type="button" value="Close" class="button close" (click)="close()"/>
+        <input type="button" value="Edit Post" class="button edit" (click)="editPost()"/>
+      </div>
+    </div>
+  </div>
+</main>
+<div class="dark-skrin" *ngIf="clickCheck"></div>
